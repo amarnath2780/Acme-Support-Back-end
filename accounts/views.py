@@ -6,7 +6,9 @@ from .models import Account
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status
-
+from django.contrib.auth import authenticate
+from .token import create_jwt_pair_tokens
+from rest_framework.views import APIView
 
 # Create your views here.
 class UserView(generics.RetrieveAPIView):
@@ -34,3 +36,36 @@ class SignUpView(generics.GenericAPIView):
             print('serializer is not valid')
             print(serializer.errors)
             return Response(data==serializer.errors , status=status.HTTP_400_BAD_REQUEST)
+
+
+class LoginView(APIView):
+    permission_classes =  [AllowAny]
+
+    def post(self , request:Request):
+        email = request.data.get('email')
+        password = request.data.get('password') 
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            if user.is_verified == True:
+                print('authenticatied')
+                tokens = create_jwt_pair_tokens(user) 
+
+                response = {
+                    "message": "Login successfull",
+                    "token": tokens,
+                    "user" : {
+                        "user_id":user.id,
+                        "email":user.email,
+                        "role":user.role,
+                    }
+                } 
+                return Response(data=response, status=status.HTTP_200_OK)
+            else:
+                response = {
+                    "message": "User is not Verified",
+                } 
+                return Response(data=response, status=status.HTTP_400_BAD_REQUEST)
+
+        else:
+            return Response(data={"message": "Invalid email or password!"}, status=status.HTTP_400_BAD_REQUEST)
