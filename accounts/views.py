@@ -66,6 +66,5 @@ class LoginView(APIView):
                     "message": "User is not Verified",
                 } 
                 return Response(data=response, status=status.HTTP_400_BAD_REQUEST)
-
         else:
             return Response(data={"message": "Invalid email or password!"}, status=status.HTTP_400_BAD_REQUEST)
