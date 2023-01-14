@@ -4,7 +4,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    
+    path('user/', include('accounts.urls')),
 ]
 
 urlpatterns += router.urls
