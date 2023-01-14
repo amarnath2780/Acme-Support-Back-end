@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'api',
     'accounts',
     'superuser',
+    'ticket',
 ]
 
 MIDDLEWARE = [
