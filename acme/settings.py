@@ -186,3 +186,13 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+
+#Twilio SMTP settings
+EMAIL_USE_TLS = True
+EMAIL_HOST ='smtp.gmail.com'
+EMAIL_PORT =  587
+EMAIL_HOST_USER = 'trabajorio2780@gmail.com'
+EMAIL_HOST_PASSWORD = 'nzlwnhqfbzgwuxmo'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'Trabajo <trabajorio2780@gmail.com>'

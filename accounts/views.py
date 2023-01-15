@@ -17,6 +17,9 @@ class UserView(generics.RetrieveAPIView):
     serializer_class = UserViewSerializer
     queryset = Account.objects.all()
 
+class AllUsersView(ReadOnlyModelViewSet):
+    queryset  = Account.objects.all()
+    serializer_class = UserViewSerializer
 
 class SignUpView(generics.GenericAPIView):
     serializer_class = SignUpSerializer
