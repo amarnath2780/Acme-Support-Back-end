@@ -14,7 +14,6 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 class ViewAllDepartments(ReadOnlyModelViewSet):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
-    permission_classes = [IsAdminUser]
 
 
 class CreateDepartment(APIView):

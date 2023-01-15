@@ -48,7 +48,6 @@ class LoginView(APIView):
 
         if user is not None:
             if user.is_verified == True:
-                print('authenticatied')
                 tokens = create_jwt_pair_tokens(user) 
 
                 response = {
