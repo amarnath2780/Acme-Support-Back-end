@@ -9,6 +9,7 @@ from rest_framework import status
 from django.contrib.auth import authenticate
 from .token import create_jwt_pair_tokens
 from rest_framework.views import APIView
+from rest_framework.viewsets import ReadOnlyModelViewSet
 
 # Create your views here.
 class UserView(generics.RetrieveAPIView):
@@ -67,3 +68,17 @@ class LoginView(APIView):
                 return Response(data=response, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(data={"message": "Invalid email or password!"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class ViewUserView(APIView):
+
+    def get(self,request:Request , id):
+        
+        try:
+            user = Account.objects.get(id=id)
+        except:
+            return Response({'Message' : 'Data Not Found'} , status=status.HTTP_400_BAD_REQUEST)
+        
+        serializer = UserViewSerializer(user, many=False)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)

@@ -19,7 +19,7 @@ class AdminTicketView(ReadOnlyModelViewSet):
 
 
 class CreateTicketsView(APIView):
-    permission_classes =[IsAuthenticated]
+    permission_classes =[]
     def post(self,request:Request):
 
         serializer = TicketSerializer(data=request.data)
@@ -31,7 +31,7 @@ class CreateTicketsView(APIView):
             return Response({'Message' : serializer.errors},status=status.HTTP_400_BAD_REQUEST)
 
 class UpdateTicketView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
     def put(self,request:Request,id):
         try:
             ticket = Tickets.objects.get(id=id)
@@ -51,7 +51,6 @@ class UserTicketView(APIView):
     def get(self,request:Request,id):
 
         user = Account.objects.get(id=id)
-        print(user.email)
         email = user.email
         try:
             ticket = Tickets.objects.filter(email=email)
