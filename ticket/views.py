@@ -27,7 +27,7 @@ class CreateTicketsView(APIView):
         id = request.data
         email= id['email']
         if serializer.is_valid():
-            send_mail_func(email)
+            # send_mail_func(email)
             serializer.save()
             return Response({'Message' : 'Department Successfully Created'}, status=status.HTTP_201_CREATED)
         else:

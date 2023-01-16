@@ -72,11 +72,22 @@ WSGI_APPLICATION = 'acme.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+DATABASES={
+   'default':{
+      'ENGINE':'django.db.backends.postgresql_psycopg2',
+      'NAME':'acem',
+      'USER':'postgres',
+      'PASSWORD':'kali2780',
+      'HOST':'localhost',
+      'PORT':'',
+   }
 }
 
 CORS_ALLOWED_ORIGINS = [
